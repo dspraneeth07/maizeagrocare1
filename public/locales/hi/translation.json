@@ -15,17 +15,7 @@
   "results": {
     "originalImage": "मूल छवि",
     "analysis": "विश्लेषण परिणाम",
-    "downloadReport": "पीडीएफ रिपोर्ट डाउनलोड करें",
-    "healthStatus": "स्वास्थ्य स्थिति",
-    "normalRange": "सामान्य सीमा",
-    "currentValue": "वर्तमान मूल्य",
-    "disease": "बीमारी",
-    "treatment": "अनुशंसित उपचार",
-    "pesticides": "अनुशंसित कीटनाशक",
-    "fertilizers": "अनुशंसित उर्वरक",
-    "medicines": "अनुशंसित दवाएं",
-    "noDisease": "कोई बीमारी नहीं मिली",
-    "healthyRange": "स्वस्थ सीमा: 0-10%"
+    "downloadReport": "पीडीएफ रिपोर्ट डाउनलोड करें"
   },
   "footer": {
     "copyright": "© 2024 मक्का एग्रो केयर। सर्वाधिकार सुरक्षित।"

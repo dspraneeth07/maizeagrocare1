@@ -15,17 +15,7 @@
   "results": {
     "originalImage": "Original Image",
     "analysis": "Analysis Results",
-    "downloadReport": "Download PDF Report",
-    "healthStatus": "Health Status",
-    "normalRange": "Normal Range",
-    "currentValue": "Current Value",
-    "disease": "Disease",
-    "treatment": "Recommended Treatment",
-    "pesticides": "Recommended Pesticides",
-    "fertilizers": "Recommended Fertilizers",
-    "medicines": "Recommended Medicines",
-    "noDisease": "No disease detected",
-    "healthyRange": "Healthy Range: 0-10%"
+    "downloadReport": "Download PDF Report"
   },
   "footer": {
     "copyright": "© 2024 Maize Agro Care. All rights reserved."

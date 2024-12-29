@@ -18,9 +18,14 @@ export function Results({ imageUrl, analysisResults }: ResultsProps) {
   const generatePDF = () => {
     const pdf = new jsPDF();
     
-    // Add header
-    pdf.setFontSize(20);
-    pdf.text("MAIZE AGRO CARE - Analysis Report", 20, 20);
+    // Add header with logo
+    pdf.setFontSize(24);
+    pdf.setTextColor(22, 163, 74); // forest-600
+    pdf.text("MAIZE AGRO CARE", 105, 20, { align: "center" });
+    
+    pdf.setFontSize(18);
+    pdf.setTextColor(0, 0, 0);
+    pdf.text("Disease Analysis Report", 105, 30, { align: "center" });
     
     // Add image if available
     if (imageUrl) {
@@ -32,24 +37,47 @@ export function Results({ imageUrl, analysisResults }: ResultsProps) {
       const result = analysisResults[0];
       const diseaseInfo = getDiseaseInfo(result.label);
       
-      pdf.setFontSize(14);
-      pdf.text("Analysis Results:", 20, 150);
+      // Disease Details Section
+      pdf.setFontSize(16);
+      pdf.setTextColor(22, 163, 74);
+      pdf.text("Disease Details", 20, 150);
       
       pdf.setFontSize(12);
-      pdf.text(`Disease: ${diseaseInfo.name} (${diseaseInfo.scientificName})`, 30, 165);
-      pdf.text(`Confidence: ${(result.score * 100).toFixed(2)}%`, 30, 180);
-      pdf.text(`Analyzed Range: ${(result.score * 100).toFixed(2)}%`, 30, 195);
-      pdf.text(`Normal Range: ${diseaseInfo.normalRange}`, 30, 210);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text(`Disease: ${diseaseInfo.name}`, 30, 165);
+      pdf.text(`Scientific Name: ${diseaseInfo.scientificName}`, 30, 175);
+      pdf.text(`Confidence: ${(result.score * 100).toFixed(2)}%`, 30, 185);
       
-      pdf.text("Treatment:", 20, 230);
-      pdf.text(`Medicine: ${diseaseInfo.treatment.medicine}`, 30, 245);
-      pdf.text(`Dosage: ${diseaseInfo.treatment.dosage}`, 30, 260);
-      pdf.text(`Frequency: ${diseaseInfo.treatment.frequency}`, 30, 275);
+      // Description Section
+      pdf.setFontSize(16);
+      pdf.setTextColor(22, 163, 74);
+      pdf.text("Description", 20, 205);
+      
+      pdf.setFontSize(12);
+      pdf.setTextColor(0, 0, 0);
+      const descriptionLines = pdf.splitTextToSize(diseaseInfo.description, 170);
+      pdf.text(descriptionLines, 20, 220);
+      
+      // Treatment Section
+      pdf.addPage();
+      pdf.setFontSize(16);
+      pdf.setTextColor(22, 163, 74);
+      pdf.text("Treatment Recommendations", 20, 20);
+      
+      pdf.setFontSize(12);
+      pdf.setTextColor(0, 0, 0);
+      pdf.text("Medicine:", 20, 35);
+      pdf.text(diseaseInfo.treatment.medicine, 30, 45);
+      pdf.text("Dosage:", 20, 60);
+      pdf.text(diseaseInfo.treatment.dosage, 30, 70);
+      pdf.text("Frequency:", 20, 85);
+      pdf.text(diseaseInfo.treatment.frequency, 30, 95);
     }
     
     // Add footer
     pdf.setFontSize(10);
-    pdf.text("© 2024 Copyrighted, developed, and designed by Dhadi Sai Praneeth Reddy", 20, 290);
+    pdf.setTextColor(128, 128, 128);
+    pdf.text("© 2024 Copyrighted, developed, and designed by Dhadi Sai Praneeth Reddy", 105, 280, { align: "center" });
     
     // Save the PDF
     pdf.save("maize-analysis-report.pdf");
@@ -73,21 +101,15 @@ export function Results({ imageUrl, analysisResults }: ResultsProps) {
       )}
 
       {analysisResults && analysisResults.length > 0 && (
-        <>
-          {analysisResults.map((result: any, index: number) => {
-            const diseaseInfo = getDiseaseInfo(result.label);
-            return (
-              <div key={index} className="space-y-6">
-                <DiseaseDetails 
-                  diseaseInfo={diseaseInfo}
-                  confidence={result.score}
-                />
-                <TreatmentRecommendations 
-                  diseaseInfo={diseaseInfo}
-                />
-              </div>
-            );
-          })}
+        <div className="space-y-6">
+          {/* Only show the first result */}
+          <DiseaseDetails 
+            diseaseInfo={getDiseaseInfo(analysisResults[0].label)}
+            confidence={analysisResults[0].score}
+          />
+          <TreatmentRecommendations 
+            diseaseInfo={getDiseaseInfo(analysisResults[0].label)}
+          />
 
           <Button
             onClick={generatePDF}
@@ -96,7 +118,7 @@ export function Results({ imageUrl, analysisResults }: ResultsProps) {
             <FileDown className="mr-2 h-4 w-4" />
             {t('results.downloadReport')}
           </Button>
-        </>
+        </div>
       )}
     </div>
   );

@@ -22,8 +22,7 @@ export const initializeModel = async () => {
       "image-classification",
       "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
       { 
-        revision: "main",
-        top: 5 // Return top 5 predictions
+        revision: "main"
       }
     );
     console.log("ML model initialized successfully");

@@ -22,7 +22,7 @@ export const initializeModel = async () => {
       "image-classification",
       "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
       { 
-        quantized: true, // For better performance
+        revision: "main",
         topk: 5 // Return top 5 predictions
       }
     );

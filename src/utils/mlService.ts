@@ -23,7 +23,7 @@ export const initializeModel = async () => {
       "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
       { 
         revision: "main",
-        topK: 5 // Return top 5 predictions
+        top_k: 5 // Return top 5 predictions using snake_case as per HF convention
       }
     );
     console.log("ML model initialized successfully");

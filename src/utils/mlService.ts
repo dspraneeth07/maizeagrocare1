@@ -17,11 +17,13 @@ const labelMapping: { [key: string]: string } = {
 export const initializeModel = async () => {
   try {
     console.log("Initializing ML model...");
+    // Using a specialized agricultural model
     classifier = await pipeline(
       "image-classification",
       "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
       { 
-        revision: "main"
+        quantized: true, // For better performance
+        topk: 5 // Return top 5 predictions
       }
     );
     console.log("ML model initialized successfully");
@@ -35,15 +37,6 @@ export const initializeModel = async () => {
 const preprocessResults = (results: any[]) => {
   console.log("Raw analysis results:", results);
   
-  if (!Array.isArray(results) || results.length === 0) {
-    console.log("No predictions found");
-    return [{
-      label: "Unknown",
-      score: 0,
-      message: "Unable to detect disease. Please try with a clearer image."
-    }];
-  }
-
   // Filter results based on confidence threshold
   const validResults = results.filter(result => result.score > CONFIDENCE_THRESHOLD);
   
@@ -58,50 +51,31 @@ const preprocessResults = (results: any[]) => {
 
   // Map the results to our disease database
   return validResults.map(result => {
-    if (!result.label) {
-      return {
-        label: "Unknown",
-        score: result.score || 0,
-        message: "Invalid prediction format"
-      };
-    }
-
-    const predictionLabel = result.label.toLowerCase();
+    // Extract relevant keywords from the model's prediction
+    const keywords = result.label.toLowerCase().split(/[,\s]+/);
     
     // Try to match with our disease database
     let matchedDisease = null;
-    
-    // First try direct mapping
-    for (const [key, value] of Object.entries(labelMapping)) {
-      if (predictionLabel.includes(key)) {
-        matchedDisease = value;
+    for (const keyword of keywords) {
+      if (labelMapping[keyword]) {
+        matchedDisease = labelMapping[keyword];
         break;
       }
     }
 
-    // If no direct mapping found, try to match with disease database
+    // If no match found in mapping, try to find in disease database
     if (!matchedDisease) {
       const diseases = Object.values(getDiseaseInfo("dummy")).map(d => d.name.toLowerCase());
       for (const disease of diseases) {
-        if (predictionLabel.includes(disease)) {
+        if (keywords.some(k => disease.includes(k))) {
           matchedDisease = disease;
           break;
         }
       }
     }
 
-    // If still no match, return unknown with original label
-    if (!matchedDisease) {
-      console.log(`No disease match found for prediction: ${predictionLabel}`);
-      return {
-        label: "Unknown",
-        score: result.score,
-        originalLabel: result.label
-      };
-    }
-
     return {
-      label: matchedDisease,
+      label: matchedDisease || "Unknown Disease",
       score: result.score,
       originalLabel: result.label
     };

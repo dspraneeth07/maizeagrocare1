@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Select,
   SelectContent,
@@ -16,10 +17,17 @@ const languages = [
 ];
 
 export function LanguageSelector() {
-  const [selectedLang, setSelectedLang] = useState("en");
+  const { i18n } = useTranslation();
+  const [selectedLang, setSelectedLang] = useState(i18n.language || "en");
+
+  const handleLanguageChange = (langCode: string) => {
+    setSelectedLang(langCode);
+    i18n.changeLanguage(langCode);
+    console.log(`Language changed to: ${langCode}`);
+  };
 
   return (
-    <Select value={selectedLang} onValueChange={setSelectedLang}>
+    <Select value={selectedLang} onValueChange={handleLanguageChange}>
       <SelectTrigger className="w-[180px] bg-white/90 backdrop-blur-sm">
         <SelectValue placeholder="Select Language" />
       </SelectTrigger>

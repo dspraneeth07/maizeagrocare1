@@ -1,0 +1,17 @@
+{
+  "header": {
+    "title": "MAIZE AGRO CARE",
+    "description": "Empowering maize farmers with AI-driven solutions"
+  },
+  "upload": {
+    "title": "Upload or capture images of your maize crop for instant disease diagnosis and treatment recommendations",
+    "uploadButton": "Upload Image",
+    "captureButton": "Capture Image"
+  },
+  "analyze": {
+    "button": "Analyze Crop Health"
+  },
+  "footer": {
+    "copyright": "© 2024 Maize Agro Care. All rights reserved."
+  }
+}

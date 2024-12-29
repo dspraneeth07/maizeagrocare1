@@ -70,8 +70,72 @@ export const maizeDiseases: Record<string, DiseaseInfo> = {
       instructions: "Ensure complete coverage of leaves when spraying"
     },
     normalRange: "0-10%"
+  },
+  "Gray Leaf Spot": {
+    name: "Gray Leaf Spot",
+    scientificName: "Cercospora zeae-maydis",
+    description: "A significant foliar disease causing gray to tan rectangular lesions on maize leaves.",
+    symptoms: [
+      "Rectangular gray lesions",
+      "Yellowing of leaves",
+      "Premature death of leaves"
+    ],
+    causes: [
+      "Fungal pathogen",
+      "High humidity",
+      "Poor air circulation"
+    ],
+    prevention: [
+      "Crop rotation",
+      "Resistant hybrids",
+      "Proper plant spacing"
+    ],
+    treatment: {
+      medicine: "Pyraclostrobin",
+      dosage: "2.0 ml per liter of water",
+      frequency: "Every 14-21 days",
+      instructions: "Apply at first sign of disease and ensure good coverage"
+    },
+    normalRange: "0-15%"
+  },
+  "Unknown Disease": {
+    name: "Unknown Disease",
+    scientificName: "Not identified",
+    description: "The disease could not be confidently identified. Please consult with a local agricultural expert.",
+    symptoms: ["Various symptoms detected"],
+    causes: ["Multiple potential causes"],
+    prevention: [
+      "Regular crop monitoring",
+      "Maintain good field hygiene",
+      "Consult local agricultural experts"
+    ],
+    treatment: {
+      medicine: "Consult expert",
+      dosage: "As recommended",
+      frequency: "As recommended",
+      instructions: "Please consult with a local agricultural expert for proper diagnosis and treatment"
+    },
+    normalRange: "Consult expert"
+  },
+  "Healthy": {
+    name: "Healthy Plant",
+    scientificName: "N/A",
+    description: "The plant appears to be healthy with no significant signs of disease.",
+    symptoms: ["No significant symptoms detected"],
+    causes: ["N/A"],
+    prevention: [
+      "Continue regular monitoring",
+      "Maintain good agricultural practices",
+      "Regular crop rotation"
+    ],
+    treatment: {
+      medicine: "No treatment needed",
+      dosage: "N/A",
+      frequency: "N/A",
+      instructions: "Continue monitoring for any signs of disease"
+    },
+    normalRange: "100% healthy"
   }
-  // ... Additional diseases can be added here
 };
 
 export const getDiseaseInfo = (label: string): DiseaseInfo => {
@@ -80,7 +144,14 @@ export const getDiseaseInfo = (label: string): DiseaseInfo => {
     return maizeDiseases[label];
   }
 
-  // If no exact match, return the first disease as default
-  // In a production environment, you might want to implement fuzzy matching
-  return maizeDiseases["Maize Rust"];
+  // If no exact match, try to find a partial match
+  const lowerLabel = label.toLowerCase();
+  for (const [key, disease] of Object.entries(maizeDiseases)) {
+    if (lowerLabel.includes(key.toLowerCase())) {
+      return disease;
+    }
+  }
+
+  // If still no match, return Unknown Disease
+  return maizeDiseases["Unknown Disease"];
 };

@@ -1,12 +1,22 @@
 {
   "header": {
     "title": "MAIZE AGRO CARE",
-    "description": "Empowering maize farmers with AI-driven solutions"
+    "description": "Empowering maize farmers with AI-driven solutions",
+    "nav": {
+      "home": "Home",
+      "analysis": "Analysis",
+      "contact": "Contact Us"
+    }
+  },
+  "home": {
+    "welcome": "Welcome to MAIZE AGRO CARE. Analyze your maize crop's health with advanced AI and get instant results on disease detection, causes, and solutions.",
+    "startAnalysis": "Start Analysis"
   },
   "upload": {
     "title": "Upload or capture images of your maize crop for instant disease diagnosis and treatment recommendations",
     "uploadButton": "Upload Image",
-    "captureButton": "Capture Image"
+    "captureButton": "Capture Image",
+    "cropType": "Crop Type"
   },
   "analyze": {
     "button": "Analyze Crop Health",
@@ -15,9 +25,22 @@
   "results": {
     "originalImage": "Original Image",
     "analysis": "Analysis Results",
-    "downloadReport": "Download PDF Report"
+    "downloadReport": "Download PDF Report",
+    "confidence": "Confidence Level",
+    "description": "Disease Description",
+    "analyzedRange": "Analyzed Range",
+    "normalRange": "Normal Range",
+    "causes": "Causes",
+    "prevention": "Prevention Steps",
+    "treatment": "Treatment Recommendations",
+    "medicine": "Medicine",
+    "dosage": "Dosage",
+    "frequency": "Frequency",
+    "instructions": "Application Instructions",
+    "futurePrevention": "Future Prevention Tips"
   },
   "footer": {
-    "copyright": "© 2024 Maize Agro Care. All rights reserved."
+    "copyright": "© 2024 Copyrighted, developed, and designed by Dhadi Sai Praneeth Reddy",
+    "github": "GitHub Profile"
   }
 }

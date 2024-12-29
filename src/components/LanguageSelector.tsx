@@ -11,9 +11,7 @@ import {
 const languages = [
   { code: "en", name: "English" },
   { code: "hi", name: "हिंदी" },
-  { code: "te", name: "తెలుగు" },
-  { code: "ta", name: "தமிழ்" },
-  { code: "kn", name: "ಕನ್ನಡ" },
+  { code: "te", name: "తెలుగు" }
 ];
 
 export function LanguageSelector() {

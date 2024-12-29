@@ -7,7 +7,7 @@ export const initializeModel = async () => {
     console.log("Initializing ML model...");
     classifier = await pipeline(
       "image-classification",
-      "microsoft/resnet-18",
+      "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
       { revision: "main" }
     );
     console.log("ML model initialized successfully");

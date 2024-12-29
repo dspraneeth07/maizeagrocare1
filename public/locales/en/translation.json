@@ -9,7 +9,13 @@
     "captureButton": "Capture Image"
   },
   "analyze": {
-    "button": "Analyze Crop Health"
+    "button": "Analyze Crop Health",
+    "analyzing": "Analyzing..."
+  },
+  "results": {
+    "originalImage": "Original Image",
+    "analysis": "Analysis Results",
+    "downloadReport": "Download PDF Report"
   },
   "footer": {
     "copyright": "© 2024 Maize Agro Care. All rights reserved."

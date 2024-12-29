@@ -7,7 +7,7 @@ export const initializeModel = async () => {
     console.log("Initializing ML model...");
     classifier = await pipeline(
       "image-classification",
-      "Xenova/maize-disease-detection",
+      "microsoft/resnet-50",
       { revision: "main" }
     );
     console.log("ML model initialized successfully");

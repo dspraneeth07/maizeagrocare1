@@ -23,7 +23,9 @@ export const initializeModel = async () => {
       "onnx-community/mobilenetv4_conv_small.e2400_r224_in1k",
       { 
         revision: "main",
-        topk: 5 // Return top 5 predictions
+        config: {
+          maxPredictions: 5 // Return top 5 predictions using the correct option name
+        }
       }
     );
     console.log("ML model initialized successfully");
